@@ -1,5 +1,8 @@
-'use strict';
+"use strict";
 
-angular.module("FunWithStuff").controller("monkey-controller", function($scope) {
-  $scope.monkeyName = "Ook";
-});
+angular
+  .module("FunWithStuff")
+  .controller("monkey-controller", function($scope, MonkeyFactory) {
+    $scope.monkeyName = "Ook";
+    MonkeyFactory.searchMovieDb("bat");
+  });
