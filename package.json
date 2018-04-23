@@ -1,0 +1,28 @@
+{
+	"name": "sean-stack",
+	"version": "1.0.0",
+	"description": "All the things:",
+	"main": "index.js",
+	"scripts": {
+		"sass": "node-sass public/sass/ -o public/css/",
+		"lint": "eslint --color **/*.js --ignore-pattern node_modules/",
+		"dev": "concurrently \"nodemon server.js\" \"rerun-script\""
+	},
+	"watches": {
+		"sass": [
+			"public/sass/*.scss"
+		],
+		"lint": "**/*.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"angular": "^1.6.10",
+		"angular-route": "^1.6.10",
+		"concurrently": "^3.5.1",
+		"express": "^4.16.3",
+		"node-sass": "^4.8.3",
+		"rerun-script": "^0.6.0"
+	}
+}
