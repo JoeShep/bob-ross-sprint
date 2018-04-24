@@ -4,5 +4,5 @@ angular
   .module("FunWithStuff")
   .controller("monkey-controller", function($scope, MonkeyFactory) {
     $scope.monkeyName = "Ook";
-    MonkeyFactory.searchMovieDb("bat");
+    MonkeyFactory.searchMovieDb("monkey");
   });
