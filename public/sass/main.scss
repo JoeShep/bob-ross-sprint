@@ -1,3 +1,28 @@
+$badass: #bada55;
+
+@mixin button($color) {
+  background-color: $color;
+  display:inline-block;
+  padding: 0.5em 0.9em;
+  position: absolute;
+  top: 1.5%;
+  left: 75%;
+  border:0.16em solid rgba(255, 255, 255, 1);
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto', sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  @include text-shadow(0.04em);
+  text-align:center;
+  transition: all 0.2s;
+}
+
+@mixin text-shadow($ems) {
+  text-shadow: 0 $ems $ems rgba(0, 0, 0, 0.85);
+}
+
 body {
   background: rebeccapurple;
 }
@@ -11,9 +36,11 @@ h2 {
 }
 
 h4 {
+  @include text-shadow(0.13em);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  padding:  0 3px;
+  float: left;
+  margin-left: 18px;
 }
 
 p {
@@ -30,13 +57,36 @@ p {
 .movie-card {
   flex-basis: 30%;
   text-align: center;
-  margin: 5px;
+  margin: 10px 0;
+  padding-bottom: 12px;
   position:relative;
   -webkit-box-shadow: 2px 7px 20px -1px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 2px 7px 20px -1px rgba(0, 0, 0, 0.61);
   box-shadow: 2px 7px 20px -1px rgba(0, 0, 0, 0.61);
 }
 
-// .movie-card {
-//   float: left;
-// }
+a.button {
+  @include button($badass);
+
+  &.button:hover {
+    border-color: rebeccapurple;
+  }
+}
+
+.movie-title {
+  display: block;
+
+  &--narrow {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .movie-title {
+    display: none;
+
+    &--narrow {
+      display: block;
+    }
+  }
+}
