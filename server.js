@@ -17,11 +17,11 @@ app.set("models", require("./app/models"));
 app.use(express.static(__dirname + "/public"));
 app.use(
   "/angular",
-  express.static(__dirname + "/node_modules/angular/angular.min.js")
+  express.static(__dirname + "/node_modules/angular/")
 );
 app.use(
   "/angular-route",
-  express.static(__dirname + "/node_modules/angular-route/angular-route.min.js")
+  express.static(__dirname + "/node_modules/angular-route/")
 );
 
 // Any requests that have to do with authentication or data from the movie API will be handled by Node
@@ -42,14 +42,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(routes);
 
+// first test of hooking up to angular
+app.get("/monkeys", (req, res) => {
+  console.log("monkey route activated", req.query.keyword);
+  res
+    .status(200)
+    .json({ "monkey keyword": `The secret word is ${req.query.keyword}` });
+});
+
 app.get("/movies", (req, res, next) => {
   console.log("get movies called");
-
   console.log(req.query.keyword);
-  // Use this to test the route, then chuck it
-  // res.status(200).json({ "movie keyword": req.query.keyword });
+
   movieAPI
-    .search({ title: "batman" }, { apiKey: "b3bd2b6a" })
+    .search({ title: req.query.keyword }, { apiKey: "b3bd2b6a" })
     .then(data => {
       // console.log("movies?", data.results);
       return Promise.all([data, data.next()]);
@@ -58,13 +64,13 @@ app.get("/movies", (req, res, next) => {
       // spread operator is cool! But what if we decided to get more than x pages of results?
       // [...allTheData[0].results, ...allTheData[1].results];
       // This allows a dynaic number of results to be squished into one array
-      const movies = [].concat(...allTheData.map( (search) => search.results));
+      const movies = [].concat(...allTheData.map(search => search.results));
       // console.log("all the movies", movies);
       res.status(200).json(movies);
     })
-    .catch(oops => {
-      console.log("oops", oops);
-      next();
+    .catch(err => {
+      console.log("oops", err);
+      next(err);
     });
 });
 
