@@ -139,3 +139,9 @@ npm install passport passport-local express-session bcrypt-nodejs body-parser
 
 Also bcrypt-cli is a help when generating a user to save to the db for testing purposes
 pass in the password and the number of times you want it to re-hash(?)
+
+### Working with the OMDB API
+Get an API key here: http://www.omdbapi.com/apikey.aspx
+
+Use it with this npm package: [IMDB-API](https://www.npmjs.com/package/imdb-api)
+
