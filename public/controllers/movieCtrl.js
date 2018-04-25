@@ -7,7 +7,13 @@ angular
 
     $scope.findMovies = () => {
       MovieFactory.findMovies($scope.keyword).then(movies => {
-        $scope.movieList = movies.data;
+        const movieList = movies.data.map( (movie) => {
+          const splitTitle = movie.title.split(" - ");
+          movie.mainTitle = splitTitle[0];
+          movie.subTitle = splitTitle[1];
+          return movie;
+        });
+        $scope.movieList = movieList;
       });
     };
   });
