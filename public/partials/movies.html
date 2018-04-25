@@ -1,0 +1,7 @@
+<input type="text" placeholder="search for movies" ng-model="keyword">
+<button class="btn btn-primary" ng-click="findMovies()">search</button>
+
+<div ng-repeat="movie in movieList">
+  <h3>{{movie.title}}</h3>
+  <img ng-src={{movie.poster}} alt="poster for {{movie.title}}">
+</div>
