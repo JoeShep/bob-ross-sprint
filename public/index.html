@@ -7,22 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
-<body ng-app="FunWithStuff">
+<body ng-app="MovieWatchlist">
   <h1>AnguNode</h1>
-  <h2 ng-controller="monkey-controller">Hello, {{monkeyName}}</h2>
+  <h2 ng-controller="monkeyCtrl">Hello, {{monkeyName}}</h2>
 
   <div ng-view></div>
 
   <!-- Is this kosher? -->
-  <script src="/angular"></script>
-  <script src="/angular-route"></script>
+  <script src="angular/angular.min.js"></script>
+  <script src="angular-route/angular-route.min.js"></script>
 
   <!-- Application scripts -->
   <script src="app.js"></script>
   <!-- factories -->
   <script src="factories/monkeyFactory.js"></script>
+  <script src="factories/movieFactory.js"></script>
   <!-- controllers -->
   <script src="controllers/monkeyCtrl.js"></script>
   <script src="controllers/testCtrl.js"></script>
+  <script src="controllers/movieCtrl.js"></script>
 </body>
 </html>

@@ -1,15 +1,16 @@
 "use strict";
 
-angular.module("FunWithStuff").factory("MonkeyFactory", $http => {
+angular.module("MovieWatchlist").factory("MonkeyFactory", $http => {
   return {
     // ooh, cool es6 method declarations, dude
-    searchMovieDb(keyword) {
-      $http.get(`/movies?keyword=${keyword}`)
-        .then( movies => {
-          console.log(movies);
+    findMonkeys(keyword) {
+      $http
+        .get(`/monkeys?keyword=${keyword}`)
+        .then(monkey => {
+          console.log(monkey);
         })
-        .catch( (err) => {
-          console.log("oops in movie fetch", err);
+        .catch(err => {
+          console.log("oops in monkey fetch", err);
         });
     }
   };
