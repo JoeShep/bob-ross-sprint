@@ -6,6 +6,6 @@
     <h4 class="movie-title">{{movie.mainTitle}}<br>{{movie.subTitle}}</h4>
     <h4 class="movie-title--narrow">{{movie.mainTitleNarrow}}<br>{{movie.subTitle}}</h4>
     <img ng-src={{movie.poster}} alt="poster for {{movie.title}}">
-    <a class="button">ADD</a>
+    <a class="button" ng-click="addToWatchlist(movie.imdbid)">ADD</a>
   </div>
 </div>

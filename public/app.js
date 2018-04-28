@@ -7,14 +7,15 @@ angular.module("MovieWatchlist", ["ngRoute"]).config($routeProvider => {
       templateUrl: "partials/test.html",
       controller: "TestCtrl"
     })
+    .when("/", {
+      templateUrl: "partials/form.html",
+      controller: "AuthCtrl"
+    })
     .when("/movies", {
       templateUrl: "partials/movies.html",
       controller: "MovieCtrl"
     });
-  // .when("/songs", {
-  // 	templateUrl: "partials/songs.html",
-  // 	controller: "SongCtrl"
-  // })
+
   // .when("/songs/:songId", {
   // 	templateUrl: "partials/songDetail.html",
   // 	controller: "SongDetailCtrl"

@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body ng-app="MovieWatchlist">
-  <h1>AnguNode</h1>
+  <h1>My Movie Watchlist Thingy</h1>
   <h2 ng-controller="monkeyCtrl">Hello, {{monkeyName}}</h2>
 
   <div ng-view></div>
@@ -21,9 +21,11 @@
   <script src="app.js"></script>
   <!-- factories -->
   <script src="factories/monkeyFactory.js"></script>
+  <script src="factories/authFactory.js"></script>
   <script src="factories/movieFactory.js"></script>
   <!-- controllers -->
   <script src="controllers/monkeyCtrl.js"></script>
+  <script src="controllers/authCtrl.js"></script>
   <script src="controllers/testCtrl.js"></script>
   <script src="controllers/movieCtrl.js"></script>
 </body>

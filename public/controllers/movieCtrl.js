@@ -23,4 +23,12 @@ angular
         $scope.movieList = movieList;
       });
     };
+
+    $scope.addToWatchlist = (imdb_id) => {
+      console.log(imdb_id);
+      MovieFactory.postToWatchlist({user_id: 1, imdb_id}).then( (movData) => {
+        console.log("watchlist item added", movData);
+      });
+    };
+
   });

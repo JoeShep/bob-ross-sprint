@@ -7,7 +7,7 @@ module.exports.register = (req, res, next) => {
 
   // first argument is name of the passport strategy we created in passport-strat.js
   passport.authenticate("local-signup", (err, user, msgObj) => {
-    console.log("Where are we? session.js", user);
+    // console.log("Where are we? session.js", user);
 
     if (err) {
       return next(err);
@@ -24,8 +24,9 @@ module.exports.register = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log("authenticated!");
-      res.status(200).json({ username: user.username, user_id: user.id });
+      console.log("authenticated!", user);
+      let currentUser = { username: user.username, user_id: user.id };
+      res.status(200).json(currentUser);
     });
   })(req, res, next);
 };

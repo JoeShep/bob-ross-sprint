@@ -13,7 +13,7 @@ const {
 } = require("../controllers/authCtrl.js");
 
 // new users
-// router.get("/register", displayRegister);
+// router.get("/users", displayRegister);
 router.post("/register", register);
 
 // login existing users

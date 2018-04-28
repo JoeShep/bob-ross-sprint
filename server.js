@@ -6,7 +6,6 @@ const session = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const routes = require("./app/routes");
-const movieAPI = require("imdb-api");
 
 // keep for demo of concurrently
 // const cow = man;
@@ -50,29 +49,7 @@ app.get("/monkeys", (req, res) => {
     .json({ "monkey keyword": `The secret word is ${req.query.keyword}` });
 });
 
-app.get("/movies", (req, res, next) => {
-  console.log("get movies called");
-  console.log(req.query.keyword);
 
-  movieAPI
-    .search({ title: req.query.keyword }, { apiKey: "b3bd2b6a" })
-    .then(data => {
-      // console.log("movies?", data.results);
-      return Promise.all([data, data.next()]);
-    })
-    .then(allTheData => {
-      // spread operator is cool! But what if we decided to get more than x pages of results?
-      // [...allTheData[0].results, ...allTheData[1].results];
-      // This allows a dynaic number of results to be squished into one array
-      const movies = [].concat(...allTheData.map(search => search.results));
-      // console.log("all the movies", movies);
-      res.status(200).json(movies);
-    })
-    .catch(err => {
-      console.log("oops", err);
-      next(err);
-    });
-});
 
 // Use this to show how it works for get, and how we will use hash-bang with Angular to avoid requesting a route from this server
 app.get("/test", (req, res) => {

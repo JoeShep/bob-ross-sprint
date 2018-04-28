@@ -10,6 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     { timestamps: false, tableName: "users" }
   );
+  User.associate = function(models) {
+    User.hasMany(models.Movie, {
+      foreignKey: "user_id"
+    });
+  };
 
   return User;
 };
