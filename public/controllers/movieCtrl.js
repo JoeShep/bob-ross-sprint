@@ -2,7 +2,7 @@
 
 angular
   .module("MovieWatchlist")
-  .controller("MovieCtrl", function($scope, MovieFactory) {
+  .controller("MovieCtrl", function($scope, MovieFactory, AuthFactory) {
     $scope.keyword = "";
 
     $scope.findMovies = () => {
@@ -32,4 +32,6 @@ angular
         console.log("watchlist item added", movData);
       });
     };
+
+    $scope.isLoggedIn = () => { let test = AuthFactory.getCurrentUser(); console.log("test", test); return test; };
   });

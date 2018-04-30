@@ -26,12 +26,11 @@ angular.module("MovieWatchlist", ["ngRoute"]).config($routeProvider => {
 angular
   .module("MovieWatchlist")
   .run(($rootScope, $location, $route, AuthFactory) => {
-    $rootScope.$on("$routeChangeStart", function(event, next) {
+    $rootScope.$on("$routeChangeStart", function(event, next, current) {
       AuthFactory.setUserStatus().then(() => {
-        // "next" is the next url angular will route to
-        console.log("next", next.resolve.restricted);
         console.log("user", AuthFactory.getCurrentUser());
-        // restricted and no user?
+
+        // check if next route is restricted and there's no user?
         if (next.resolve.restricted() && !AuthFactory.getCurrentUser()) {
           $location.path("/auth");
           $route.reload(); // or try $window.location.url = ("#!/auth")

@@ -28,10 +28,12 @@ angular.module("MovieWatchlist").factory("AuthFactory", $http => {
 
     setUserStatus() {
       return $http
-        .get("/user/status")
-        .then( ({user}) => {
+        .get("/status")
+        .then( (user) => {
+          console.log('user in set user status', user);
+
           if (user) {
-            currentUser = user;
+            currentUser = user.data;
           } else {
             currentUser = null;
           }
