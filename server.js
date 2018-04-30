@@ -49,8 +49,6 @@ app.get("/monkeys", (req, res) => {
     .json({ "monkey keyword": `The secret word is ${req.query.keyword}` });
 });
 
-
-
 // Use this to show how it works for get, and how we will use hash-bang with Angular to avoid requesting a route from this server
 app.get("/test", (req, res) => {
   console.log("test route");

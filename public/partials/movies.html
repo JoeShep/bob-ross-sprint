@@ -1,11 +1,19 @@
-<input type="text" placeholder="search for movies" ng-model="keyword">
-<button class="btn btn-primary" ng-click="findMovies()">search</button>
+
+<nav>
+  <input type="text" placeholder="search for movies" ng-model="keyword">
+  <button class="btn btn-primary" ng-click="findMovies()">search</button>
+  <div ng-show="isLoggedIn()">
+    <button>Show Unwatched</button>
+    <button>Show Watched</button>
+    <button>Show Favorites</button>
+  </div>
+</nav>
 
 <div class="movie-container">
   <div class="movie-card" ng-repeat="movie in movieList">
     <h4 class="movie-title">{{movie.mainTitle}}<br>{{movie.subTitle}}</h4>
     <h4 class="movie-title--narrow">{{movie.mainTitleNarrow}}<br>{{movie.subTitle}}</h4>
-    <img ng-src={{movie.poster}} alt="poster for {{movie.title}}">
     <a class="button" ng-click="addToWatchlist(movie.imdbid)">ADD</a>
+    <img ng-src={{movie.poster}} alt="poster for {{movie.title}}">
   </div>
 </div>

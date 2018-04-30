@@ -5,20 +5,37 @@ angular.module("MovieWatchlist", ["ngRoute"]).config($routeProvider => {
   $routeProvider
     .when("/test", {
       templateUrl: "partials/test.html",
-      controller: "TestCtrl"
+      controller: "TestCtrl",
+      // resolve calls its methods when the route tries to load
+      resolve: { restricted: () => true }
     })
     .when("/", {
-      templateUrl: "partials/form.html",
-      controller: "AuthCtrl"
-    })
-    .when("/movies", {
       templateUrl: "partials/movies.html",
-      controller: "MovieCtrl"
-    });
-
-  // .when("/songs/:songId", {
-  // 	templateUrl: "partials/songDetail.html",
-  // 	controller: "SongDetailCtrl"
-  // })
-  // .otherwise("/");
+      controller: "MovieCtrl",
+      resolve: { restricted: () => false }
+    })
+    .when("/auth", {
+      templateUrl: "partials/form.html",
+      controller: "AuthCtrl",
+      resolve: { restricted: () => false }
+    })
+    .otherwise("/");
 });
+
+// The run method is a good place for a route change listener since it runs only once on initialization after the injector is finished loading all the modules.
+angular
+  .module("MovieWatchlist")
+  .run(($rootScope, $location, $route, AuthFactory) => {
+    $rootScope.$on("$routeChangeStart", function(event, next) {
+      AuthFactory.setUserStatus().then(() => {
+        // "next" is the next url angular will route to
+        console.log("next", next.resolve.restricted);
+        console.log("user", AuthFactory.getCurrentUser());
+        // restricted and no user?
+        if (next.resolve.restricted() && !AuthFactory.getCurrentUser()) {
+          $location.path("/auth");
+          $route.reload(); // or try $window.location.url = ("#!/auth")
+        }
+      });
+    });
+  });

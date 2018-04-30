@@ -20,26 +20,26 @@ angular.module("MovieWatchlist").factory("AuthFactory", $http => {
 
     getCurrentUser() {
       return currentUser;
-    }
+    },
 
     // let logoutUser = function() {
     //   return firebase.auth().signOut();
     // };
 
-    // let isAuthenticated = function() {
-    //   return new Promise((resolve, reject) => {
-    //     firebase.auth().onAuthStateChanged(user => {
-    //       if (user) {
-    //         console.log("usr", user);
-    //         currentUser = user.uid;
-    //         console.log("current User", currentUser);
-    //         resolve(true);
-    //       } else {
-    //         resolve(false);
-    //       }
-    //     });
-    //   });
-    // };
+    setUserStatus() {
+      return $http
+        .get("/user/status")
+        .then( ({user}) => {
+          if (user) {
+            currentUser = user;
+          } else {
+            currentUser = null;
+          }
+        })
+        .catch(() => {
+          currentUser = null;
+        });
+    }
 
     // let getUser = function() {
     //   return currentUser;
