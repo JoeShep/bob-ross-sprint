@@ -14,10 +14,7 @@ app.set("models", require("./app/models"));
 
 // This "express.static" middleware will handle all the requested files we need to send to the browser: index.html, css, and JS files. All other html will be generated and displayed by Angular, on the client side of things
 app.use(express.static(__dirname + "/public"));
-app.use(
-  "/angular",
-  express.static(__dirname + "/node_modules/angular/")
-);
+app.use("/angular", express.static(__dirname + "/node_modules/angular/"));
 app.use(
   "/angular-route",
   express.static(__dirname + "/node_modules/angular-route/")

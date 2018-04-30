@@ -8,7 +8,7 @@ angular.module("MovieWatchlist").factory("MovieFactory", $http => {
     },
 
     postToWatchlist(movie) {
-      console.log("factory movie", movie)
+      console.log("factory movie", movie);
       return $http.post(`/watchlist`, angular.toJson(movie));
     }
   };

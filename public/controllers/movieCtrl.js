@@ -8,6 +8,8 @@ angular
     $scope.findMovies = () => {
       MovieFactory.findMovies($scope.keyword).then(movies => {
         const movieList = movies.data.map(movie => {
+          if (movie.poster === "N/A")
+            movie.poster = "/images/poster-coming-soon.jpg";
           // Specific fix for Star Wars movies, but might be able to generalize?
           const splitTitle = movie.title.split(" - ");
           movie.mainTitle = splitTitle[0];
@@ -24,11 +26,10 @@ angular
       });
     };
 
-    $scope.addToWatchlist = (imdb_id) => {
+    $scope.addToWatchlist = imdb_id => {
       console.log(imdb_id);
-      MovieFactory.postToWatchlist({user_id: 1, imdb_id}).then( (movData) => {
+      MovieFactory.postToWatchlist({ user_id: 1, imdb_id }).then(movData => {
         console.log("watchlist item added", movData);
       });
     };
-
   });
