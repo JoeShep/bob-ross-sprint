@@ -25,6 +25,7 @@ $badass: #bada55;
 
 body {
   background: rebeccapurple;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 h1 {
@@ -45,6 +46,16 @@ h4 {
 
 p {
   color: white;
+}
+
+nav {
+  a {
+    position: absolute;
+    top: 2.5%;
+    left: 83%;
+    color: white;
+    font-size: 1.2rem;
+  }
 }
 
 .movie-container {

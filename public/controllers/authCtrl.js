@@ -2,7 +2,7 @@
 
 angular
   .module("MovieWatchlist")
-  .controller("AuthCtrl", function($scope, AuthFactory, $window) {
+  .controller("AuthCtrl", function($scope, AuthFactory, $window, $location) {
     $scope.account = {};
 
     $scope.register = () => {
@@ -13,16 +13,18 @@ angular
           "Password and confirmation don't match. Please try again";
         return null;
       }
-      AuthFactory.createUser($scope.account).then( () => {
-        $window.location.href = "#!/movies/";  //what should be the route here? ?user=<id> or /id or nothing..... Let's go with nothing, and save the user info to a factory before we re-route. Then we can ping the factory for user info once we get to the new route.
+      AuthFactory.createUser($scope.account).then(user => {
+        AuthFactory.broadcast(user);
+        $location.path("/"); //what should be the route here? ?user=<id> or /id or nothing..... Let's go with nothing, and save the user info to a factory before we re-route. Then we can ping the factory for user info once we get to the new route.
       });
     };
 
     $scope.login = () => {
       console.log("scope account?", $scope.account);
-      AuthFactory.loginUser($scope.account).then( () => {
-        console.log("logged in controller", AuthFactory.getCurrentUser());
-        $window.location.href = "#!/movies";
+      AuthFactory.loginUser($scope.account).then((user) => {
+        AuthFactory.broadcastUserLogin(user);
+        // console.log("logged in controller", AuthFactory.getCurrentUser());
+        $location.path("/");
       });
     };
   });

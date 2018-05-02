@@ -11,3 +11,8 @@ module.exports.saveToWatchlist = ({ app, body: { user_id, imdb_id } }, res, next
       next(err);
     });
 };
+
+module.exports.getWatchlist = ({ query: { user }}, res, next) => {
+  console.log("getWatchlist called in wl ctrl", user);
+  res.json({tempMsg: `you searched for ${user}'s list`});
+};

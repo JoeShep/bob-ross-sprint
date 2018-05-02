@@ -2,8 +2,21 @@
 
 angular
   .module("MovieWatchlist")
-  .controller("MovieCtrl", function($scope, MovieFactory, AuthFactory) {
+  .controller("MovieCtrl", function($scope, MovieFactory) {
     $scope.keyword = "";
+
+    $scope.$on("handleBroadcast", function(event, user) {
+      console.log("handleBroadcast called in movieCtrl", user);
+      MovieFactory.getWatchlist(user.id)
+        .then((watchlist) => {
+          console.log("watch", watchlist);
+          $scope.hasWatchlist = watchlist ? true : false;
+          console.log("watchlist thing", $scope.hasWatchlist);
+        })
+        .catch(err => {
+          console.log("error fetching watchlist", err);
+        });
+    });
 
     $scope.findMovies = () => {
       MovieFactory.findMovies($scope.keyword).then(movies => {
@@ -32,6 +45,4 @@ angular
         console.log("watchlist item added", movData);
       });
     };
-
-    $scope.isLoggedIn = () => { let test = AuthFactory.getCurrentUser(); console.log("test", test); return test; };
   });

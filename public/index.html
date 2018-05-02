@@ -8,13 +8,14 @@
   <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body ng-app="MovieWatchlist">
+  <div ng-include="'partials/header.html'"></div>
 
-  <h1>My Movie Watchlist Thingy</h1>
   <h2 ng-controller="monkeyCtrl">Hello, {{monkeyName}}</h2>
 
   <div ng-view></div>
 
-  <!-- Is this kosher? -->
+
+
   <script src="angular/angular.min.js"></script>
   <script src="angular-route/angular-route.min.js"></script>
 
@@ -27,6 +28,7 @@
   <!-- controllers -->
   <script src="controllers/monkeyCtrl.js"></script>
   <script src="controllers/authCtrl.js"></script>
+  <script src="controllers/navCtrl.js"></script>
   <script src="controllers/testCtrl.js"></script>
   <script src="controllers/movieCtrl.js"></script>
 </body>

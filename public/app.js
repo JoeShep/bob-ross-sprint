@@ -25,16 +25,19 @@ angular.module("MovieWatchlist", ["ngRoute"]).config($routeProvider => {
 // The run method is a good place for a route change listener since it runs only once on initialization after the injector is finished loading all the modules.
 angular
   .module("MovieWatchlist")
-  .run(($rootScope, $location, $route, AuthFactory) => {
+  .run(($rootScope, $location, $route, $window, AuthFactory) => {
     $rootScope.$on("$routeChangeStart", function(event, next, current) {
       AuthFactory.setUserStatus().then(() => {
         console.log("user", AuthFactory.getCurrentUser());
+        console.log("next", next);
+        AuthFactory.broadcastUserLogin(AuthFactory.getCurrentUser());
 
         // check if next route is restricted and there's no user?
-        if (next.resolve.restricted() && !AuthFactory.getCurrentUser()) {
-          $location.path("/auth");
-          $route.reload(); // or try $window.location.url = ("#!/auth")
-        }
+        // if (next.resolve.restricted() && !AuthFactory.getCurrenteUser()) {
+        //   // $location.path("/auth");
+        //   // $route.reload(); // or try
+        //   $window.location.url = ("#!/auth");
+        // }
       });
     });
   });

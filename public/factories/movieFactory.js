@@ -10,6 +10,11 @@ angular.module("MovieWatchlist").factory("MovieFactory", $http => {
     postToWatchlist(movie) {
       console.log("factory movie", movie);
       return $http.post(`/watchlist`, angular.toJson(movie));
+    },
+
+    getWatchlist(userId) {
+      console.log("getwatchlist", userId);
+      return $http.get(`/watchlist?user=${userId}`);
     }
   };
 });

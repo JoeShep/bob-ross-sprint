@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("MovieWatchlist").factory("AuthFactory", $http => {
+angular.module("MovieWatchlist").factory("AuthFactory", ($http, $rootScope) => {
   let currentUser = null;
 
   return {
@@ -11,21 +11,24 @@ angular.module("MovieWatchlist").factory("AuthFactory", $http => {
         return userData.data;
       });
     },
-
+    // TODO: refactor create and login to use helper func in callback. Not DRY
     loginUser(userObj) {
       return $http.post("/login", userObj).then(user => {
-        currentUser = user;
+        console.log("login User method in auth fact", user.data);
+        currentUser = user.data;
+        return user.data;
       });
+    },
+
+    logoutUser() {
+      return $http.post("/logout");
     },
 
     getCurrentUser() {
       return currentUser;
     },
 
-    // let logoutUser = function() {
-    //   return firebase.auth().signOut();
-    // };
-
+    // For when/if we lose the currentUser on page refresh/http calls
     setUserStatus() {
       return $http
         .get("/status")
@@ -41,10 +44,11 @@ angular.module("MovieWatchlist").factory("AuthFactory", $http => {
         .catch(() => {
           currentUser = null;
         });
-    }
+    },
 
-    // let getUser = function() {
-    //   return currentUser;
-    // };
+    broadcastUserLogin(user) {
+      console.log("calling broadcast", user);
+      $rootScope.$broadcast('handleBroadcast', user);
+    }
   };
 });
