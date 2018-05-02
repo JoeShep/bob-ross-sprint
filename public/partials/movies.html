@@ -2,7 +2,8 @@
 <nav>
   <input type="text" placeholder="search for movies" ng-model="keyword">
   <button class="btn btn-primary" ng-click="findMovies()">search</button>
-  <div ng-show="hasWatchlist">
+  <div ng-show="watchlist">
+    <button>Show Untracked</button>
     <button>Show Unwatched</button>
     <button>Show Watched</button>
     <button>Show Favorites</button>

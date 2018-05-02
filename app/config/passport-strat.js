@@ -1,6 +1,6 @@
 "use strict";
 
-// This module will be executed in app.js.
+// This module will be executed in server.js.
 const bCrypt = require("bcrypt-nodejs");
 const passport = require("passport");
 

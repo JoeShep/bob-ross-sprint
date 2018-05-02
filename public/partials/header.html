@@ -1,0 +1,5 @@
+<nav ng-controller="NavCtrl">
+  <h1>My Movie Watchlist Thingy</h1>
+  <a ng-hide="currentUser" href="#!/auth">login/register</a>
+  <a ng-show="currentUser" href="#" ng-click="logout()">logout</a>
+</nav>

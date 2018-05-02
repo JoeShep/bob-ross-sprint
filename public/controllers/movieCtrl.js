@@ -4,14 +4,16 @@ angular
   .module("MovieWatchlist")
   .controller("MovieCtrl", function($scope, MovieFactory) {
     $scope.keyword = "";
+    let currentUserId = null;
 
     $scope.$on("handleBroadcast", function(event, user) {
       console.log("handleBroadcast called in movieCtrl", user);
       MovieFactory.getWatchlist(user.id)
-        .then((watchlist) => {
+        .then(watchlist => {
           console.log("watch", watchlist);
-          $scope.hasWatchlist = watchlist ? true : false;
-          console.log("watchlist thing", $scope.hasWatchlist);
+          currentUserId = user.id;
+          $scope.watchlist = watchlist.data ? true : false;
+          console.log("watchlist thing", $scope.watchlist);
         })
         .catch(err => {
           console.log("error fetching watchlist", err);
@@ -41,8 +43,11 @@ angular
 
     $scope.addToWatchlist = imdb_id => {
       console.log(imdb_id);
-      MovieFactory.postToWatchlist({ user_id: 1, imdb_id }).then(movData => {
-        console.log("watchlist item added", movData);
-      });
+      MovieFactory.postToWatchlist({ user_id: currentUserId, imdb_id }).then(
+        movData => {
+          console.log("watchlist item added", movData);
+          $scope.watchlist = true;
+        }
+      );
     };
   });

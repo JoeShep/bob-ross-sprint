@@ -14,14 +14,14 @@ angular
         return null;
       }
       AuthFactory.createUser($scope.account).then(user => {
-        AuthFactory.broadcast(user);
+        AuthFactory.broadcastUserLogin(user);
         $location.path("/"); //what should be the route here? ?user=<id> or /id or nothing..... Let's go with nothing, and save the user info to a factory before we re-route. Then we can ping the factory for user info once we get to the new route.
       });
     };
 
     $scope.login = () => {
       console.log("scope account?", $scope.account);
-      AuthFactory.loginUser($scope.account).then((user) => {
+      AuthFactory.loginUser($scope.account).then(user => {
         AuthFactory.broadcastUserLogin(user);
         // console.log("logged in controller", AuthFactory.getCurrentUser());
         $location.path("/");
